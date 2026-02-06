@@ -1,6 +1,5 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'standalone',
   env: {
     AUTH_API_URL: process.env.AUTH_API_URL || 'http://localhost:8081',
     PLAYER_API_URL: process.env.PLAYER_API_URL || 'http://localhost:8082',
