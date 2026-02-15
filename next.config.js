@@ -1,11 +1,11 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   env: {
-    AUTH_API_URL: process.env.AUTH_API_URL || 'http://localhost:8081',
-    PLAYER_API_URL: process.env.PLAYER_API_URL || 'http://localhost:8082',
-    MONSTER_API_URL: process.env.MONSTER_API_URL || 'http://localhost:8083',
-    INVOCATION_API_URL: process.env.INVOCATION_API_URL || 'http://localhost:8084',
-    COMBAT_API_URL: process.env.COMBAT_API_URL || 'http://localhost:8085',
+    NEXT_PUBLIC_AUTH_API_URL: process.env.NEXT_PUBLIC_AUTH_API_URL || 'http://localhost:8081',
+    NEXT_PUBLIC_PLAYER_API_URL: process.env.NEXT_PUBLIC_PLAYER_API_URL || 'http://localhost:8082',
+    NEXT_PUBLIC_MONSTER_API_URL: process.env.NEXT_PUBLIC_MONSTER_API_URL || 'http://localhost:8083',
+    NEXT_PUBLIC_INVOCATION_API_URL: process.env.NEXT_PUBLIC_INVOCATION_API_URL || 'http://localhost:8084',
+    NEXT_PUBLIC_COMBAT_API_URL: process.env.NEXT_PUBLIC_COMBAT_API_URL || 'http://localhost:8085',
   },
   async headers() {
     return [

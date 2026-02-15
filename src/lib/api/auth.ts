@@ -1,6 +1,6 @@
 import type { LoginRequest, LoginResponse } from '@/lib/types/auth'
 
-const AUTH_API_URL = process.env.AUTH_API_URL || 'http://localhost:8081'
+const AUTH_API_URL = process.env.NEXT_PUBLIC_AUTH_API_URL || 'http://localhost:8081'
 
 export const authApi = {
   async login(data: LoginRequest): Promise<LoginResponse> {

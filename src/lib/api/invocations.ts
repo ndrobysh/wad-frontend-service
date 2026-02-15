@@ -1,7 +1,7 @@
 import { apiClient } from './client'
 import type { Monster } from '@/lib/types/monster'
 
-const INVOCATION_API_URL = process.env.INVOCATION_API_URL || 'http://localhost:8084'
+const INVOCATION_API_URL = process.env.NEXT_PUBLIC_INVOCATION_API_URL || 'http://localhost:8084'
 
 export const invocationApi = {
   summon(): Promise<{ monster: Monster }> {

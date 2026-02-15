@@ -120,7 +120,7 @@ export default function Home() {
     setLoading(true)
 
     try {
-      const res = await fetch(`${process.env.AUTH_API_URL}/api/auth/login`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_AUTH_API_URL}/api/auth/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ username, password })
@@ -155,7 +155,7 @@ export default function Home() {
 
   const loadPlayerData = async (user: string, authToken: string) => {
     try {
-      const res = await fetch(`${process.env.PLAYER_API_URL}/api/players/${user}`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_PLAYER_API_URL}/api/players/${user}`, {
         headers: { 'Authorization': `Bearer ${authToken}` }
       })
       if (res.ok) {
@@ -170,7 +170,7 @@ export default function Home() {
 
   const loadMonsters = async (user: string, authToken: string) => {
     try {
-      const res = await fetch(`${process.env.MONSTER_API_URL}/api/monsters/player/${user}`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_MONSTER_API_URL}/api/monsters/player/${user}`, {
         headers: { 'Authorization': `Bearer ${authToken}` }
       })
       if (res.ok) {
@@ -189,7 +189,7 @@ export default function Home() {
     setIsAnimating(true)
 
     try {
-      const res = await fetch(`${process.env.INVOCATION_API_URL}/api/invocations/summon`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_INVOCATION_API_URL}/api/invocations/summon`, {
         method: 'POST',
         headers: { 
           'Authorization': `Bearer ${token}`,

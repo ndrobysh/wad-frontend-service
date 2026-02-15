@@ -1,7 +1,7 @@
 import { apiClient } from './client'
 import type { Monster, MonsterResponse } from '@/lib/types/monster'
 
-const MONSTER_API_URL = process.env.MONSTER_API_URL || 'http://localhost:8083'
+const MONSTER_API_URL = process.env.NEXT_PUBLIC_MONSTER_API_URL || 'http://localhost:8083'
 
 export const monsterApi = {
   getPlayerMonsters(): Promise<Monster[]> {
