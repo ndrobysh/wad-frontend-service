@@ -221,7 +221,7 @@ export default function Home() {
     return (
       <div className="min-h-screen bg-[#0a0a0f] flex items-center justify-center p-4" suppressHydrationWarning>
         {/* background gradient */}
-        <div className="absolute inset-0 bg-gradient-to-br from-violet-900/20 via-transparent to-blue-900/20" />
+        <div className="absolute inset-0 bg-linear-to-br from-violet-900/20 via-transparent to-blue-900/20" />
         
         {/* Login Card */}
         <div className="relative w-full max-w-md">
@@ -233,7 +233,7 @@ export default function Home() {
                 <div className="absolute inset-0 bg-violet-500/20 rounded-2xl blur-xl" />
                 
               </div>
-              <h1 className="text-3xl font-bold bg-gradient-to-r from-white via-violet-200 to-blue-200 bg-clip-text text-transparent mb-3">
+              <h1 className="text-3xl font-bold bg-linear-to-r from-white via-violet-200 to-blue-200 bg-clip-text text-transparent mb-3">
                 WAD Gacha
               </h1>
               <p className="text-slate-400 text-sm max-w-xs">
@@ -320,10 +320,10 @@ export default function Home() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex h-16 items-center justify-between">
             <div className="flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-violet-500/20 to-blue-500/20 border border-white/10">
+              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-linear-to-br from-violet-500/20 to-blue-500/20 border border-white/10">
                 <Sparkles className="h-5 w-5 text-violet-400" />
               </div>
-              <span className="text-lg font-bold bg-gradient-to-r from-white to-slate-400 bg-clip-text text-transparent">
+              <span className="text-lg font-bold bg-linear-to-r from-white to-slate-400 bg-clip-text text-transparent">
                 WAD Gacha
               </span>
             </div>
@@ -410,7 +410,7 @@ export default function Home() {
               </div>
               <span>Portail d'Invocation</span>
             </CardTitle>
-            <CardDescription className="text-slate-400 pl-[52px]">
+            <CardDescription className="text-slate-400 pl-13">
               Invoquez un nouveau monstre pour rejoindre votre équipe de champions
             </CardDescription>
           </CardHeader>
@@ -516,7 +516,7 @@ export default function Home() {
                 </span>
               )}
             </CardTitle>
-            <CardDescription className="text-slate-400 pl-[52px]">
+            <CardDescription className="text-slate-400 pl-13">
               Gérez et admirez votre collection de monstres légendaires
             </CardDescription>
           </CardHeader>
@@ -538,7 +538,7 @@ export default function Home() {
                   return (
                     <div 
                       key={monster.id}
-                      className={`rounded-2xl border ${config.border} bg-gradient-to-br ${config.gradient} p-5 hover:border-white/20 transition-colors`}
+                      className={`rounded-2xl border ${config.border} bg-linear-to-br ${config.gradient} p-5 hover:border-white/20 transition-colors`}
                     >
                       <div>
                         <div className="flex items-start justify-between mb-3">
