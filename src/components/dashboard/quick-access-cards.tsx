@@ -1,7 +1,27 @@
 import Link from 'next/link'
-import { BookOpen, User, ArrowRight } from 'lucide-react'
+import { BookOpen, User, ArrowRight, Sparkles, Crosshair } from 'lucide-react'
 
 const cards = [
+  {
+    href: '/invocation',
+    icon: Sparkles,
+    title: 'Invocation',
+    description: 'Invoquez de nouveaux monstres',
+    color: 'violet',
+    iconBg: 'bg-violet-500/20',
+    iconColor: 'text-violet-400',
+    hoverBorder: 'hover:border-violet-500/30',
+  },
+  {
+    href: '/combat',
+    icon: Crosshair,
+    title: 'Combat',
+    description: 'Lancez des combats entre vos monstres',
+    color: 'red',
+    iconBg: 'bg-red-500/20',
+    iconColor: 'text-red-400',
+    hoverBorder: 'hover:border-red-500/30',
+  },
   {
     href: '/bestiary',
     icon: BookOpen,
@@ -17,10 +37,10 @@ const cards = [
     icon: User,
     title: 'Profil',
     description: 'Gérez votre progression et statistiques',
-    color: 'violet',
-    iconBg: 'bg-violet-500/20',
-    iconColor: 'text-violet-400',
-    hoverBorder: 'hover:border-violet-500/30',
+    color: 'amber',
+    iconBg: 'bg-amber-500/20',
+    iconColor: 'text-amber-400',
+    hoverBorder: 'hover:border-amber-500/30',
   },
 ] as const
 

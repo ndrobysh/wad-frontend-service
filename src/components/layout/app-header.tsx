@@ -3,13 +3,15 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { Button } from '@/components/ui/button'
-import { Sparkles, LogOut, User, LayoutDashboard, BookOpen, Swords, UserCircle } from 'lucide-react'
+import { Sparkles, LogOut, User, LayoutDashboard, BookOpen, Swords, UserCircle, Crosshair } from 'lucide-react'
 import { useAuth } from '@/lib/hooks/use-auth'
 import { cn } from '@/lib/utils'
 
 const navLinks = [
   { href: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
   { href: '/collection', label: 'Collection', icon: Swords },
+  { href: '/invocation', label: 'Invocation', icon: Sparkles },
+  { href: '/combat', label: 'Combat', icon: Crosshair },
   { href: '/bestiary', label: 'Bestiaire', icon: BookOpen },
   { href: '/profile', label: 'Profil', icon: UserCircle },
 ]

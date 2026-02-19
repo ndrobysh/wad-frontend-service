@@ -52,13 +52,20 @@ export default function DashboardPage() {
     setIsAnimating(true)
 
     try {
-      const data = await invocationApi.summon()
-      setTimeout(() => {
-        setSummonedMonster(data.monster)
+      const response = await invocationApi.invoke()
+
+      if (response.status === 'COMPLETED' && response.generatedMonsterId) {
+        const monster = await monsterApi.getById(response.generatedMonsterId)
+        setTimeout(() => {
+          setSummonedMonster(monster)
+          setIsAnimating(false)
+          toast.success(`${monster.name} a rejoint votre équipe !`)
+        }, 1500)
+        loadData()
+      } else {
         setIsAnimating(false)
-        toast.success(`${data.monster.name} a rejoint votre équipe !`)
-      }, 1500)
-      loadData()
+        toast.error(response.message || "Échec de l'invocation")
+      }
     } catch {
       toast.error("Échec de l'invocation")
       setIsAnimating(false)
