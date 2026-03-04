@@ -1,7 +1,7 @@
 import { apiClient } from './client'
 import type { Player } from '@/lib/types/player'
 
-const PLAYER_API_URL = process.env.PLAYER_API_URL || 'http://localhost:8082'
+const PLAYER_API_URL = process.env.NEXT_PUBLIC_PLAYER_API_URL || 'http://localhost:8082'
 
 export const playerApi = {
   getProfile(): Promise<Player> {
