@@ -13,7 +13,7 @@ export function SegmentedStatBar({ value, maxValue, color, segments = 5 }: Segme
   const hasPartial = ratio * segments - filledCount > 0.25
 
   return (
-    <div className="flex gap-[2px]">
+    <div className="flex gap-[1px]">
       {Array.from({ length: segments }, (_, i) => {
         const isFilled = i < filledCount
         const isPartial = i === filledCount && hasPartial
@@ -23,7 +23,7 @@ export function SegmentedStatBar({ value, maxValue, color, segments = 5 }: Segme
             key={i}
             className={cn(
               'h-[6px] flex-1 rounded-[1px]',
-              isFilled || isPartial ? '' : 'bg-secondary'
+              isFilled || isPartial ? '' : 'bg-[#333c57]'
             )}
             style={
               isFilled

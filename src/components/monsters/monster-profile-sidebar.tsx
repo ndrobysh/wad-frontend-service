@@ -104,8 +104,8 @@ export function MonsterProfileSidebar({
         </div>
       </div>
 
-      {/* Action Buttons */}
-      <div className="flex gap-2 mt-auto">
+      {/* Action Buttons — sticky on mobile */}
+      <div className="flex gap-2 mt-auto max-md:fixed max-md:bottom-0 max-md:left-0 max-md:right-0 max-md:bg-card max-md:p-3 max-md:border-t-2 max-md:border-border max-md:z-10">
         <Button
           onClick={onTrain}
           disabled={training}

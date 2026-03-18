@@ -61,7 +61,7 @@ export function MonsterSkills({ monster, onUpdate }: MonsterSkillsProps) {
         {monster.skills.map((skill, index) => (
           <div
             key={`${skill.num}-${index}`}
-            className="flex items-center justify-between bg-background border-2 border-border border-l-[3px] rounded-sm p-3"
+            className="flex items-center justify-between bg-[#1a1c2c] border-2 border-border border-l-[3px] rounded-sm p-3"
             style={{ borderLeftColor: getSkillColor(skill.ratio.stat) }}
           >
             <div className="flex-1">
