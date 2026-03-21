@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect } from 'react'
 import { invocationApi } from '@/lib/api/invocations'
 import type { BaseMonster } from '@/lib/types/invocation'
 
@@ -9,7 +9,7 @@ export function useInvocationRates() {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
 
-  const fetch = useCallback(async () => {
+  const fetchRates = async () => {
     setLoading(true)
     setError(null)
     try {
@@ -20,11 +20,11 @@ export function useInvocationRates() {
     } finally {
       setLoading(false)
     }
-  }, [])
+  }
 
   useEffect(() => {
-    fetch()
-  }, [fetch])
+    fetchRates()
+  }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
-  return { rates, loading, error, refetch: fetch }
+  return { rates, loading, error, refetch: fetchRates }
 }

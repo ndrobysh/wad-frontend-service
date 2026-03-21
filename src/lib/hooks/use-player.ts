@@ -18,8 +18,8 @@ export function usePlayer() {
     try {
       const data = await playerApi.getByUsername(username)
       setPlayer(data)
-    } catch {
-      setError('Erreur de chargement du profil')
+    } catch (err: any) { // eslint-disable-line @typescript-eslint/no-explicit-any
+      setError(err?.message || 'Erreur de chargement du profil')
     } finally {
       setLoading(false)
     }
