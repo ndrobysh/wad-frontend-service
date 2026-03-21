@@ -18,8 +18,7 @@ export default function LoginPage() {
   if (isLoading || isAuthenticated) return null
 
   return (
-    <div className="min-h-screen bg-[#0a0a0f] flex items-center justify-center p-4" suppressHydrationWarning>
-      <div className="absolute inset-0 bg-linear-to-br from-violet-900/20 via-transparent to-blue-900/20" />
+    <div className="min-h-screen bg-background flex items-center justify-center p-4" suppressHydrationWarning>
       <div className="relative w-full max-w-md">
         <LoginForm />
       </div>

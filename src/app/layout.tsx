@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { Providers } from './providers'
+import { bodyFont, monoFont } from './fonts'
 import './globals.css'
 
 export const metadata: Metadata = {
@@ -13,8 +14,8 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="fr" suppressHydrationWarning>
-      <body className="dark">
+    <html lang="fr" className={`dark ${bodyFont.variable} ${monoFont.variable}`} suppressHydrationWarning>
+      <body>
         <Providers>{children}</Providers>
       </body>
     </html>

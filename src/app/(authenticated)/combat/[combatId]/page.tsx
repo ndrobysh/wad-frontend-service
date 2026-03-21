@@ -23,9 +23,9 @@ export default function CombatReplayPage({ params }: CombatReplayPageProps) {
   if (error || !combat) {
     return (
       <div className="flex flex-col items-center justify-center py-16 text-center">
-        <p className="text-red-400 mb-4">{error || 'Combat introuvable'}</p>
+        <p className="text-destructive font-mono mb-4">{error || 'Combat introuvable'}</p>
         <Link href="/combat">
-          <Button variant="ghost" className="text-slate-400 hover:text-white">
+          <Button variant="ghost" className="text-muted-foreground hover:text-foreground">
             <ArrowLeft className="h-4 w-4 mr-2" />
             Retour à l&apos;arène
           </Button>
@@ -38,7 +38,7 @@ export default function CombatReplayPage({ params }: CombatReplayPageProps) {
     <>
       <div className="flex items-center gap-2">
         <Link href="/combat">
-          <Button variant="ghost" className="text-slate-400 hover:text-white">
+          <Button variant="ghost" className="text-muted-foreground hover:text-foreground">
             <ArrowLeft className="h-4 w-4 mr-2" />
             Arène
           </Button>

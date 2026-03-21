@@ -1,6 +1,6 @@
 'use client'
 
-import { Percent } from 'lucide-react'
+import { InvocationIcon } from '@/components/icons'
 import { ElementBadge } from '@/components/shared/element-badge'
 import { MonsterStats } from '@/components/monsters/monster-stats'
 import { getElementConfig } from '@/lib/constants/elements'
@@ -12,17 +12,17 @@ interface InvocationRatesProps {
 }
 
 function getRarityColor(rate: number): string {
-  if (rate >= 0.3) return 'text-slate-400'
-  if (rate >= 0.1) return 'text-blue-400'
-  if (rate >= 0.03) return 'text-violet-400'
-  return 'text-amber-400'
+  if (rate >= 0.3) return 'text-[#7a8194]'
+  if (rate >= 0.1) return 'text-[#38b764]'
+  if (rate >= 0.03) return 'text-[#5fcde4]'
+  return 'text-[#ffcd75]'
 }
 
 function getRarityBarColor(rate: number): string {
-  if (rate >= 0.3) return 'bg-slate-400'
-  if (rate >= 0.1) return 'bg-blue-400'
-  if (rate >= 0.03) return 'bg-violet-400'
-  return 'bg-amber-400'
+  if (rate >= 0.3) return 'bg-[#7a8194]'
+  if (rate >= 0.1) return 'bg-[#38b764]'
+  if (rate >= 0.03) return 'bg-[#5fcde4]'
+  return 'bg-[#ffcd75]'
 }
 
 function getRarityLabel(rate: number): string {
@@ -36,11 +36,13 @@ export function InvocationRates({ rates }: InvocationRatesProps) {
   return (
     <section className="space-y-4">
       <div className="flex items-center gap-3">
-        <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-violet-500/20">
-          <Percent className="h-5 w-5 text-violet-400" />
+        <div className="flex h-10 w-10 items-center justify-center bg-secondary rounded-sm border-2 border-border">
+          <InvocationIcon className="h-5 w-5 text-primary" size={20} />
         </div>
         <div>
-          <h2 className="text-xl font-bold text-white">Taux d&apos;Invocation</h2>
+          <h2 className="font-mono text-xl uppercase tracking-wide text-white">
+            Taux d&apos;Invocation
+          </h2>
           <p className="text-sm text-slate-400">Probabilités d&apos;obtenir chaque monstre</p>
         </div>
       </div>
@@ -58,14 +60,15 @@ export function InvocationRates({ rates }: InvocationRatesProps) {
             <div
               key={rate.id}
               className={cn(
-                'rounded-2xl border bg-gradient-to-br p-5 space-y-4 transition-colors',
-                config.border,
-                config.gradient,
+                'bg-card border-2 border-border rounded-sm border-l-4 p-5 space-y-4 transition-colors',
+                config.borderClass,
               )}
             >
               {/* Header */}
               <div className="space-y-1.5">
-                <h3 className="font-bold text-white leading-tight">{rate.name}</h3>
+                <h3 className="font-mono font-bold uppercase tracking-wide text-white leading-tight">
+                  {rate.name}
+                </h3>
                 <ElementBadge elementType={rate.elementType} />
               </div>
 
@@ -81,16 +84,18 @@ export function InvocationRates({ rates }: InvocationRatesProps) {
               {/* Rate */}
               <div className="space-y-1.5">
                 <div className="flex items-baseline justify-between">
-                  <span className={cn('text-2xl font-bold tabular-nums', rarityColor)}>
+                  <span className={cn('text-2xl font-mono font-bold tabular-nums', rarityColor)}>
                     {ratePercent}%
                   </span>
-                  <span className={cn('text-xs font-medium', rarityColor)}>{rarityLabel}</span>
+                  <span className={cn('text-xs font-mono font-medium uppercase', rarityColor)}>
+                    {rarityLabel}
+                  </span>
                 </div>
 
                 {/* Rate bar */}
-                <div className="h-1.5 w-full rounded-full bg-white/10 overflow-hidden">
+                <div className="h-3 w-full rounded-none bg-secondary overflow-hidden border border-border">
                   <div
-                    className={cn('h-full rounded-full transition-all', barColor)}
+                    className={cn('h-full rounded-none transition-all', barColor)}
                     style={{ width: `${barWidth}%` }}
                   />
                 </div>

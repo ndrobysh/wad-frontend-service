@@ -1,16 +1,14 @@
-import { Loader2 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
-interface LoadingSpinnerProps {
-  className?: string
-  label?: string
-}
-
-export function LoadingSpinner({ className, label }: LoadingSpinnerProps) {
+export function LoadingSpinner({ label, className }: { label?: string; className?: string }) {
   return (
-    <div className="flex flex-col items-center justify-center py-16 gap-4">
-      <Loader2 className={cn('h-8 w-8 animate-spin text-violet-400', className)} />
-      {label && <p className="text-sm text-slate-400">{label}</p>}
+    <div className={cn("flex flex-col items-center justify-center py-16 gap-4", className)}>
+      <div className="flex gap-2">
+        <div className="w-3 h-3 bg-primary rounded-sm animate-bounce [animation-delay:0ms]" />
+        <div className="w-3 h-3 bg-primary rounded-sm animate-bounce [animation-delay:150ms]" />
+        <div className="w-3 h-3 bg-primary rounded-sm animate-bounce [animation-delay:300ms]" />
+      </div>
+      {label && <p className="text-sm text-muted-foreground font-mono">{label}</p>}
     </div>
   )
 }

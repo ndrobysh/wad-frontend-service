@@ -1,46 +1,38 @@
 import Link from 'next/link'
-import { BookOpen, User, ArrowRight, Sparkles, Crosshair } from 'lucide-react'
+import { InvocationIcon, CombatIcon, BestiaryIcon, ProfileIcon } from '@/components/icons'
 
 const cards = [
   {
     href: '/invocation',
-    icon: Sparkles,
+    icon: InvocationIcon,
     title: 'Invocation',
     description: 'Invoquez de nouveaux monstres',
-    color: 'violet',
-    iconBg: 'bg-violet-500/20',
-    iconColor: 'text-violet-400',
-    hoverBorder: 'hover:border-violet-500/30',
+    borderLeft: 'border-l-[#ffcd75]',
+    iconColor: 'text-[#ffcd75]',
   },
   {
     href: '/combat',
-    icon: Crosshair,
+    icon: CombatIcon,
     title: 'Combat',
     description: 'Lancez des combats entre vos monstres',
-    color: 'red',
-    iconBg: 'bg-red-500/20',
-    iconColor: 'text-red-400',
-    hoverBorder: 'hover:border-red-500/30',
+    borderLeft: 'border-l-[#f77622]',
+    iconColor: 'text-[#f77622]',
   },
   {
     href: '/bestiary',
-    icon: BookOpen,
+    icon: BestiaryIcon,
     title: 'Bestiaire',
     description: 'Explorez tous les monstres disponibles',
-    color: 'emerald',
-    iconBg: 'bg-emerald-500/20',
-    iconColor: 'text-emerald-400',
-    hoverBorder: 'hover:border-emerald-500/30',
+    borderLeft: 'border-l-[#38b764]',
+    iconColor: 'text-[#38b764]',
   },
   {
     href: '/profile',
-    icon: User,
+    icon: ProfileIcon,
     title: 'Profil',
     description: 'Gérez votre progression et statistiques',
-    color: 'amber',
-    iconBg: 'bg-amber-500/20',
-    iconColor: 'text-amber-400',
-    hoverBorder: 'hover:border-amber-500/30',
+    borderLeft: 'border-l-[#ffcd75]',
+    iconColor: 'text-[#ffcd75]',
   },
 ] as const
 
@@ -53,19 +45,23 @@ export function QuickAccessCards() {
           <Link
             key={card.href}
             href={card.href}
-            className={`group rounded-2xl border border-white/10 bg-white/5 p-6 transition-colors ${card.hoverBorder}`}
+            className={`group bg-card border-2 border-border rounded-sm border-l-4 ${card.borderLeft} p-6 transition-colors hover:border-primary/50`}
           >
             <div className="flex items-start justify-between">
               <div className="flex items-center gap-3">
-                <div className={`flex h-10 w-10 items-center justify-center rounded-xl ${card.iconBg}`}>
-                  <Icon className={`h-5 w-5 ${card.iconColor}`} />
+                <div className="flex h-10 w-10 items-center justify-center bg-secondary rounded-sm">
+                  <Icon className={`h-5 w-5 ${card.iconColor}`} size={20} />
                 </div>
                 <div>
-                  <p className="font-semibold text-white">{card.title}</p>
+                  <p className="font-mono font-semibold uppercase tracking-wide text-white">
+                    {card.title}
+                  </p>
                   <p className="text-sm text-slate-400">{card.description}</p>
                 </div>
               </div>
-              <ArrowRight className="h-5 w-5 text-slate-500 group-hover:text-white transition-colors mt-1" />
+              <span className="text-slate-500 group-hover:text-white transition-colors mt-1 font-mono text-sm">
+                &gt;
+              </span>
             </div>
           </Link>
         )

@@ -4,6 +4,7 @@ import type { Player } from '@/lib/types/player'
 const PLAYER_API_URL = process.env.NEXT_PUBLIC_PLAYER_API_URL || 'http://localhost:8082'
 
 export const playerApi = {
+  // profil du joueur connecte
   getProfile(): Promise<Player> {
     return apiClient<Player>(`${PLAYER_API_URL}/api/players/profile`)
   },

@@ -2,7 +2,8 @@
 
 import { useState } from 'react'
 import { Button } from '@/components/ui/button'
-import { UserCircle, Crown, Zap, Swords, Loader2 } from 'lucide-react'
+import { ProfileIcon, CollectionIcon, CoinIcon } from '@/components/icons'
+import { Crown } from 'lucide-react'
 import { usePlayer } from '@/lib/hooks/use-player'
 import { playerApi } from '@/lib/api/players'
 import { XpProgress } from '@/components/players/xp-progress'
@@ -39,7 +40,7 @@ export default function ProfilePage() {
   if (error || !player) {
     return (
       <div className="flex flex-col items-center justify-center py-16 text-center">
-        <p className="text-red-400">{error || 'Profil introuvable'}</p>
+        <p className="text-destructive font-mono">{error || 'Profil introuvable'}</p>
       </div>
     )
   }
@@ -47,43 +48,43 @@ export default function ProfilePage() {
   return (
     <>
       <div className="flex items-center gap-3">
-        <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-violet-500/20">
-          <UserCircle className="h-5 w-5 text-violet-400" />
+        <div className="flex h-10 w-10 items-center justify-center bg-secondary border-2 border-border rounded-sm">
+          <ProfileIcon className="h-5 w-5 text-primary" size={20} />
         </div>
-        <h1 className="text-2xl font-bold">Profil</h1>
+        <h1 className="text-2xl font-mono font-bold uppercase tracking-wide">Profil</h1>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* Player Info */}
-        <div className="rounded-2xl border border-white/10 bg-white/5 p-6 space-y-6">
+        <div className="rounded-sm border-2 border-border bg-card p-6 space-y-6">
           <div className="flex items-center gap-4">
-            <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-violet-500/20">
-              <UserCircle className="h-8 w-8 text-violet-400" />
+            <div className="flex h-16 w-16 items-center justify-center bg-secondary border-2 border-border rounded-sm">
+              <ProfileIcon className="h-8 w-8 text-primary" size={32} />
             </div>
             <div>
-              <h2 className="text-xl font-bold">{player.username}</h2>
-              <p className="text-sm text-slate-400">Joueur</p>
+              <h2 className="text-xl font-mono font-bold">{player.username}</h2>
+              <p className="text-sm text-muted-foreground font-mono">Joueur</p>
             </div>
           </div>
 
           <div className="space-y-4">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
-                <Crown className="h-4 w-4 text-amber-400" />
-                <span className="text-sm text-slate-400">Niveau</span>
+                <Crown className="h-4 w-4 text-primary" />
+                <span className="text-sm text-muted-foreground font-mono">Niveau</span>
               </div>
-              <span className="text-lg font-bold">
-                {player.level} <span className="text-sm text-slate-500 font-normal">/ 50</span>
+              <span className="text-lg font-mono font-bold">
+                {player.level} <span className="text-sm text-muted-foreground font-normal">/ 50</span>
               </span>
             </div>
 
             <div>
               <div className="flex items-center justify-between mb-2">
                 <div className="flex items-center gap-2">
-                  <Zap className="h-4 w-4 text-violet-400" />
-                  <span className="text-sm text-slate-400">Expérience</span>
+                  <CoinIcon className="h-4 w-4 text-primary" size={16} />
+                  <span className="text-sm text-muted-foreground font-mono">Expérience</span>
                 </div>
-                <span className="text-sm text-slate-300">
+                <span className="text-sm text-foreground font-mono">
                   {player.experience} / {player.xpThreshold}
                 </span>
               </div>
@@ -92,40 +93,37 @@ export default function ProfilePage() {
 
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
-                <Swords className="h-4 w-4 text-blue-400" />
-                <span className="text-sm text-slate-400">Capacité de collection</span>
+                <CollectionIcon className="h-4 w-4 text-primary" size={16} />
+                <span className="text-sm text-muted-foreground font-mono">Capacité de collection</span>
               </div>
-              <span className="text-lg font-bold">
+              <span className="text-lg font-mono font-bold">
                 {player.monsters.length}{' '}
-                <span className="text-sm text-slate-500 font-normal">/ {player.maxMonsters}</span>
+                <span className="text-sm text-muted-foreground font-normal">/ {player.maxMonsters}</span>
               </span>
             </div>
           </div>
         </div>
 
         {/* Actions */}
-        <div className="rounded-2xl border border-white/10 bg-white/5 p-6 space-y-6">
-          <h3 className="text-lg font-bold">Actions</h3>
+        <div className="rounded-sm border-2 border-border bg-card p-6 space-y-6">
+          <h3 className="text-lg font-mono font-bold uppercase tracking-wide">Actions</h3>
 
           <div className="space-y-4">
-            <div className="p-4 rounded-xl bg-white/5 border border-white/5">
-              <h4 className="text-sm font-semibold mb-2">Gagner de l&apos;expérience</h4>
-              <p className="text-xs text-slate-400 mb-4">
+            <div className="p-4 rounded-sm bg-secondary border-2 border-border">
+              <h4 className="text-sm font-mono font-semibold mb-2">Gagner de l&apos;expérience</h4>
+              <p className="text-xs text-muted-foreground font-mono mb-4">
                 Gagnez de l&apos;expérience pour monter en niveau et augmenter votre capacité de collection.
               </p>
               <Button
                 onClick={handleGainXp}
                 disabled={gaining || player.level >= 50}
-                className="bg-violet-600 hover:bg-violet-500 text-white"
+                className="font-mono"
               >
                 {gaining ? (
-                  <>
-                    <Loader2 className="h-4 w-4 mr-2 animate-spin" />
-                    Entraînement...
-                  </>
+                  <span>... Entraînement...</span>
                 ) : (
                   <>
-                    <Zap className="h-4 w-4 mr-2" />
+                    <CoinIcon className="h-4 w-4 mr-2" size={16} />
                     Gagner XP (+25)
                   </>
                 )}

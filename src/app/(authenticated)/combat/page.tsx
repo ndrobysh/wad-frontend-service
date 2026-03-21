@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { Crosshair, Loader2, Swords } from 'lucide-react'
+import { CombatIcon } from '@/components/icons'
 import { toast } from 'sonner'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
@@ -53,27 +53,27 @@ export default function CombatPage() {
     <>
       {/* Page header */}
       <div className="flex items-center gap-3">
-        <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-red-500/20">
-          <Crosshair className="h-5 w-5 text-red-400" />
+        <div className="flex h-10 w-10 items-center justify-center bg-secondary border-2 border-border rounded-sm">
+          <CombatIcon className="h-5 w-5 text-destructive" size={20} />
         </div>
         <div>
-          <h1 className="text-2xl font-bold">Arène de Combat</h1>
-          <p className="text-sm text-slate-400">
+          <h1 className="text-2xl font-mono font-bold uppercase tracking-wide">Arène de Combat</h1>
+          <p className="text-sm text-muted-foreground font-mono">
             Affrontez vos monstres dans des duels épiques
           </p>
         </div>
       </div>
 
       {/* Combat launch section */}
-      <Card className="rounded-2xl border border-white/10 bg-white/5">
+      <Card>
         <CardHeader className="pb-2">
-          <CardTitle className="flex items-center gap-3 text-xl">
-            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-red-500/20">
-              <Swords className="h-5 w-5 text-red-400" />
+          <CardTitle className="flex items-center gap-3 text-xl font-mono uppercase tracking-wide">
+            <div className="flex h-10 w-10 items-center justify-center bg-secondary border-2 border-border rounded-sm">
+              <CombatIcon className="h-5 w-5 text-destructive" size={20} />
             </div>
             <span>Choisir les combattants</span>
           </CardTitle>
-          <CardDescription className="text-slate-400 pl-13">
+          <CardDescription className="text-muted-foreground pl-13">
             Sélectionnez deux monstres différents pour lancer un combat
           </CardDescription>
         </CardHeader>
@@ -81,13 +81,13 @@ export default function CombatPage() {
         <CardContent className="space-y-6 pt-4">
           {monsters.length < 2 ? (
             <div className="flex flex-col items-center justify-center py-8 text-center gap-3">
-              <div className="flex h-14 w-14 items-center justify-center rounded-full bg-white/5">
-                <Swords className="h-7 w-7 text-slate-500" />
+              <div className="flex h-14 w-14 items-center justify-center bg-secondary border-2 border-border rounded-sm">
+                <CombatIcon className="h-7 w-7 text-muted-foreground" size={28} />
               </div>
-              <p className="text-slate-400">
+              <p className="text-muted-foreground font-mono">
                 Vous devez avoir au moins 2 monstres pour combattre
               </p>
-              <p className="text-sm text-slate-500">
+              <p className="text-sm text-muted-foreground font-mono">
                 Invoquez davantage de monstres depuis le tableau de bord.
               </p>
             </div>
@@ -115,16 +115,14 @@ export default function CombatPage() {
                   onClick={handleSimulate}
                   disabled={!canFight || simulating}
                   size="lg"
-                  className="h-12 px-8 rounded-xl bg-red-600 hover:bg-red-500 text-white font-bold disabled:opacity-50"
+                  variant="destructive"
+                  className="h-12 px-8 font-bold font-mono disabled:opacity-50"
                 >
                   {simulating ? (
-                    <>
-                      <Loader2 className="mr-2 h-5 w-5 animate-spin" />
-                      Combat en cours...
-                    </>
+                    <span>... Combat en cours...</span>
                   ) : (
                     <>
-                      <Swords className="mr-2 h-5 w-5" />
+                      <CombatIcon className="mr-2 h-5 w-5" size={20} />
                       Lancer le combat
                     </>
                   )}
@@ -141,12 +139,15 @@ export default function CombatPage() {
           result={result}
           monster1Name={monster1.name}
           monster2Name={monster2.name}
+          winnerElementType={
+            result.winnerId === monster1.id ? monster1.elementType : monster2.elementType
+          }
         />
       )}
 
       {/* Combat history section */}
       <div className="space-y-4">
-        <h2 className="text-xl font-bold">Historique des Combats</h2>
+        <h2 className="text-xl font-mono font-bold uppercase tracking-wide">Historique des Combats</h2>
         <CombatHistoryList combats={combats} />
       </div>
     </>

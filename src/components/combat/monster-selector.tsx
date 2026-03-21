@@ -3,7 +3,8 @@
 import { cn } from '@/lib/utils'
 import { getElementConfig } from '@/lib/constants/elements'
 import { MonsterStats } from '@/components/monsters/monster-stats'
-import { Star } from 'lucide-react'
+import { MonsterSprite } from '@/components/monsters/monster-sprite'
+import { StarIcon } from '@/components/icons'
 import type { Monster } from '@/lib/types/monster'
 
 interface MonsterSelectorProps {
@@ -23,7 +24,7 @@ export function MonsterSelector({
 }: MonsterSelectorProps) {
   return (
     <div className="flex flex-col gap-3">
-      <p className="text-sm font-medium text-slate-300">{label}</p>
+      <p className="text-sm font-mono font-medium uppercase tracking-wide text-slate-300">{label}</p>
       <div className="max-h-64 overflow-y-auto pr-1">
         <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
           {monsters.map((monster) => {
@@ -39,28 +40,32 @@ export function MonsterSelector({
                 onClick={() => onSelect(monster.id)}
                 disabled={isDisabled}
                 className={cn(
-                  'rounded-2xl border p-3 text-left transition-all duration-150 cursor-pointer',
-                  'bg-white/5 hover:bg-white/10',
+                  'bg-card border-2 rounded-sm p-3 text-left transition-all duration-150 cursor-pointer',
+                  'hover:bg-secondary',
                   isSelected
-                    ? 'ring-2 ring-violet-500 border-violet-500/50'
-                    : config.border,
+                    ? 'border-primary ring-2 ring-primary/40'
+                    : 'border-border hover:border-primary/40',
                   isDisabled && 'opacity-40 pointer-events-none',
                 )}
               >
                 <div className="flex items-center justify-between mb-2">
                   <div className="flex items-center gap-1.5">
-                    <ElementIcon className="h-3.5 w-3.5 text-slate-400" />
-                    <span className="text-xs text-slate-400 capitalize">
+                    <ElementIcon className={cn('h-3.5 w-3.5', config.textClass)} size={14} />
+                    <span className={cn('text-xs font-mono capitalize', config.textClass)}>
                       {monster.elementType}
                     </span>
                   </div>
-                  <div className="flex items-center gap-1 px-1.5 py-0.5 rounded-full bg-white/10 border border-white/5">
-                    <Star className="h-2.5 w-2.5 text-amber-400" />
-                    <span className="text-xs font-medium">{monster.level}</span>
+                  <div className="flex items-center gap-1 px-1.5 py-0.5 rounded-sm bg-secondary border border-border">
+                    <StarIcon className="h-2.5 w-2.5 text-primary" size={10} />
+                    <span className="text-xs font-mono font-medium">{monster.level}</span>
                   </div>
                 </div>
 
-                <p className="text-sm font-bold text-white mb-2 truncate">
+                <div className="flex justify-center py-2">
+                  <MonsterSprite name={monster.name} elementType={monster.elementType} size={64} />
+                </div>
+
+                <p className="text-sm font-mono font-bold text-white mb-2 truncate uppercase tracking-wide">
                   {monster.name}
                 </p>
 

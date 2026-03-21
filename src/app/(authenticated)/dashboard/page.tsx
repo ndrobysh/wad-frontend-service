@@ -3,7 +3,7 @@
 import { useState, useEffect, useCallback } from 'react'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
-import { Loader2, Sparkles } from 'lucide-react'
+import { InvocationIcon } from '@/components/icons'
 import { useAuth } from '@/lib/hooks/use-auth'
 import { playerApi } from '@/lib/api/players'
 import { monsterApi } from '@/lib/api/monsters'
@@ -35,8 +35,8 @@ export default function DashboardPage() {
       ])
       setPlayer(playerData)
       setMonsters(monsterData)
-    } catch {
-      toast.error('Erreur de chargement des données')
+    } catch (e) {
+      console.error('Erreur chargement dashboard:', e)
     } finally {
       setLoading(false)
     }
@@ -83,15 +83,15 @@ export default function DashboardPage() {
       {player && <PlayerStatsBar player={player} monsterCount={monsters.length} />}
 
       {/* Summon Section */}
-      <Card className="border-white/10 bg-white/5 rounded-2xl">
+      <Card>
         <CardHeader className="pb-2">
-          <CardTitle className="flex items-center gap-3 text-xl">
-            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-violet-500/20">
-              <Sparkles className="h-5 w-5 text-violet-400" />
+          <CardTitle className="flex items-center gap-3 text-xl font-mono uppercase tracking-wide">
+            <div className="flex h-10 w-10 items-center justify-center bg-secondary border-2 border-border rounded-sm">
+              <InvocationIcon className="h-5 w-5 text-primary" size={20} />
             </div>
             <span>Portail d&apos;Invocation</span>
           </CardTitle>
-          <CardDescription className="text-slate-400 pl-13">
+          <CardDescription className="text-muted-foreground pl-13">
             Invoquez un nouveau monstre pour rejoindre votre équipe de champions
           </CardDescription>
         </CardHeader>
@@ -102,16 +102,13 @@ export default function DashboardPage() {
               onClick={handleSummon}
               disabled={summoning || isAnimating}
               size="lg"
-              className="h-14 px-10 rounded-xl bg-violet-600 hover:bg-violet-500 text-lg font-bold disabled:opacity-50"
+              className="h-14 px-10 text-lg font-bold font-mono disabled:opacity-50"
             >
               {summoning || isAnimating ? (
-                <>
-                  <Loader2 className="mr-2 h-5 w-5 animate-spin" />
-                  Invocation...
-                </>
+                <span>... Invocation...</span>
               ) : (
                 <>
-                  <Sparkles className="mr-2 h-5 w-5" />
+                  <InvocationIcon className="mr-2 h-5 w-5" size={20} />
                   Invoquer
                 </>
               )}

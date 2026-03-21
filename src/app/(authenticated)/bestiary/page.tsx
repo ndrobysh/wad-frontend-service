@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { BookOpen } from 'lucide-react'
+import { BestiaryIcon } from '@/components/icons'
 import { monsterApi } from '@/lib/api/monsters'
 import { MonsterCard } from '@/components/monsters/monster-card'
 import { LoadingSpinner } from '@/components/shared/loading-spinner'
@@ -21,7 +21,10 @@ export default function BestiaryPage() {
     monsterApi
       .getAllMonsters()
       .then(setMonsters)
-      .catch(() => setError('Erreur de chargement du bestiaire'))
+      .catch((err) => {
+        console.log('bestiary load failed:', err) // FIXME: meilleure gestion erreurs
+        setError('Erreur de chargement du bestiaire')
+      })
       .finally(() => setLoading(false))
   }, [])
 
@@ -34,7 +37,7 @@ export default function BestiaryPage() {
   if (error) {
     return (
       <div className="flex flex-col items-center justify-center py-16 text-center">
-        <p className="text-red-400">{error}</p>
+        <p className="text-destructive font-mono">{error}</p>
       </div>
     )
   }
@@ -42,12 +45,12 @@ export default function BestiaryPage() {
   return (
     <>
       <div className="flex items-center gap-3">
-        <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-emerald-500/20">
-          <BookOpen className="h-5 w-5 text-emerald-400" />
+        <div className="flex h-10 w-10 items-center justify-center bg-secondary border-2 border-border rounded-sm">
+          <BestiaryIcon className="h-5 w-5 text-primary" size={20} />
         </div>
         <div>
-          <h1 className="text-2xl font-bold">Bestiaire</h1>
-          <p className="text-sm text-slate-400">Tous les monstres existants</p>
+          <h1 className="text-2xl font-mono font-bold uppercase tracking-wide">Bestiaire</h1>
+          <p className="text-sm text-muted-foreground font-mono">Tous les monstres existants</p>
         </div>
       </div>
 
@@ -61,14 +64,14 @@ export default function BestiaryPage() {
               key={el}
               onClick={() => setFilter(el)}
               className={cn(
-                'flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium transition-colors border',
+                'flex items-center gap-1.5 px-3 py-1.5 rounded-sm text-xs font-mono font-medium transition-colors border-2',
                 filter === el
-                  ? 'bg-white/10 border-white/20 text-white'
-                  : 'bg-white/5 border-white/5 text-slate-400 hover:text-white hover:border-white/10',
+                  ? 'border-primary bg-secondary text-foreground'
+                  : 'bg-card border-border text-muted-foreground hover:text-foreground hover:border-primary/50',
               )}
             >
               {Icon && <Icon className="h-3.5 w-3.5" />}
-              <span className="capitalize">{el === 'all' ? 'Tous' : el}</span>
+              <span>{el === 'all' ? 'Tous' : cfg?.label ?? el}</span>
             </button>
           )
         })}
@@ -76,7 +79,7 @@ export default function BestiaryPage() {
 
       {filtered.length === 0 ? (
         <div className="flex flex-col items-center justify-center py-16 text-center">
-          <p className="text-slate-400">Aucun monstre trouvé</p>
+          <p className="text-muted-foreground font-mono">Aucun monstre trouvé</p>
         </div>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">

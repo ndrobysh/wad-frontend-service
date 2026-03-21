@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useCallback } from 'react'
-import { Sparkles, Loader2 } from 'lucide-react'
+import { InvocationIcon } from '@/components/icons'
 import { toast } from 'sonner'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
@@ -93,27 +93,27 @@ export default function InvocationPage() {
     <div className="space-y-8">
       {/* Page header */}
       <div className="flex items-center gap-4">
-        <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-violet-500/20">
-          <Sparkles className="h-5 w-5 text-violet-400" />
+        <div className="flex h-10 w-10 items-center justify-center bg-secondary border-2 border-border rounded-sm">
+          <InvocationIcon className="h-5 w-5 text-primary" size={20} />
         </div>
         <div>
-          <h1 className="text-2xl font-bold text-white">Portail d&apos;Invocation</h1>
-          <p className="text-sm text-slate-400">
+          <h1 className="text-2xl font-mono font-bold uppercase tracking-wide text-foreground">Portail d&apos;Invocation</h1>
+          <p className="text-sm text-muted-foreground font-mono">
             Invoquez de puissants monstres pour agrandir votre équipe de champions
           </p>
         </div>
       </div>
 
       {/* Summon section */}
-      <Card className="border-white/10 bg-white/5 rounded-2xl">
+      <Card>
         <CardHeader className="pb-2">
-          <CardTitle className="flex items-center gap-3 text-xl">
-            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-violet-500/20">
-              <Sparkles className="h-5 w-5 text-violet-400" />
+          <CardTitle className="flex items-center gap-3 text-xl font-mono uppercase tracking-wide">
+            <div className="flex h-10 w-10 items-center justify-center bg-secondary border-2 border-border rounded-sm">
+              <InvocationIcon className="h-5 w-5 text-primary" size={20} />
             </div>
             <span>Invoquer un Monstre</span>
           </CardTitle>
-          <CardDescription className="text-slate-400 pl-13">
+          <CardDescription className="text-muted-foreground pl-13">
             Tentez votre chance et découvrez quel monstre vous rejoindra
           </CardDescription>
         </CardHeader>
@@ -124,16 +124,13 @@ export default function InvocationPage() {
               onClick={handleSummon}
               disabled={summoning || isAnimating}
               size="lg"
-              className="h-14 px-10 rounded-xl bg-violet-600 hover:bg-violet-500 text-lg font-bold disabled:opacity-50 transition-colors"
+              className="h-14 px-10 text-lg font-bold font-mono disabled:opacity-50"
             >
               {summoning || isAnimating ? (
-                <>
-                  <Loader2 className="mr-2 h-5 w-5 animate-spin" />
-                  Invocation en cours...
-                </>
+                <span>... Invocation en cours...</span>
               ) : (
                 <>
-                  <Sparkles className="mr-2 h-5 w-5" />
+                  <InvocationIcon className="mr-2 h-5 w-5" size={20} />
                   Invoquer
                 </>
               )}
@@ -148,8 +145,8 @@ export default function InvocationPage() {
 
       {/* Rates section */}
       {ratesError ? (
-        <div className="rounded-2xl border border-white/10 bg-white/5 p-6">
-          <p className="text-sm text-red-400 text-center">{ratesError}</p>
+        <div className="rounded-sm border-2 border-border bg-card p-6">
+          <p className="text-sm text-destructive font-mono text-center">{ratesError}</p>
         </div>
       ) : (
         <InvocationRates rates={rates} />
@@ -157,8 +154,8 @@ export default function InvocationPage() {
 
       {/* History section */}
       {historyError ? (
-        <div className="rounded-2xl border border-white/10 bg-white/5 p-6">
-          <p className="text-sm text-red-400 text-center">{historyError}</p>
+        <div className="rounded-sm border-2 border-border bg-card p-6">
+          <p className="text-sm text-destructive font-mono text-center">{historyError}</p>
         </div>
       ) : (
         <InvocationHistory

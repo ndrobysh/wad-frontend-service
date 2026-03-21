@@ -33,22 +33,18 @@ export function ConfirmDialog({
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>{trigger}</AlertDialogTrigger>
-      <AlertDialogContent className="bg-[#12121a] border-white/10">
+      <AlertDialogContent className="bg-card border-2 border-border rounded-sm">
         <AlertDialogHeader>
-          <AlertDialogTitle className="text-white">{title}</AlertDialogTitle>
-          <AlertDialogDescription className="text-slate-400">{description}</AlertDialogDescription>
+          <AlertDialogTitle className="text-foreground font-mono">{title}</AlertDialogTitle>
+          <AlertDialogDescription className="text-muted-foreground">{description}</AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
-          <AlertDialogCancel className="border-white/10 bg-white/5 text-slate-300 hover:bg-white/10 hover:text-white">
+          <AlertDialogCancel variant="outline">
             Annuler
           </AlertDialogCancel>
           <AlertDialogAction
             onClick={onConfirm}
-            className={
-              variant === 'destructive'
-                ? 'bg-red-600 hover:bg-red-500 text-white'
-                : 'bg-violet-600 hover:bg-violet-500 text-white'
-            }
+            variant={variant === 'destructive' ? 'destructive' : 'default'}
           >
             {confirmLabel}
           </AlertDialogAction>

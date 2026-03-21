@@ -4,6 +4,7 @@ export interface MonsterSkillRatio {
 }
 
 export interface MonsterSkill {
+  name?: string
   num: number
   dmg: number
   ratio: MonsterSkillRatio
