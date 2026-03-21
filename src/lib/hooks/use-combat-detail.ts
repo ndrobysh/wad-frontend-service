@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect } from 'react'
 import { combatApi } from '@/lib/api/combat'
 import type { CombatLog } from '@/lib/types/combat'
 
@@ -9,22 +9,18 @@ export function useCombatDetail(id: string) {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
 
-  const fetch = useCallback(async () => {
+  const refetch = () => {
     setLoading(true)
     setError(null)
-    try {
-      const data = await combatApi.getById(id)
-      setCombat(data)
-    } catch {
-      setError('Combat introuvable')
-    } finally {
-      setLoading(false)
-    }
-  }, [id])
+    combatApi.getById(id)
+      .then(setCombat)
+      .catch(() => setError('Combat introuvable'))
+      .finally(() => setLoading(false))
+  }
 
   useEffect(() => {
-    fetch()
-  }, [fetch])
+    refetch()
+  }, [id]) // eslint-disable-line react-hooks/exhaustive-deps
 
-  return { combat, loading, error, refetch: fetch }
+  return { combat, loading, error, refetch }
 }
