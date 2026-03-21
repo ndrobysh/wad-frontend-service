@@ -15,6 +15,18 @@ import { useInvocationRates } from '@/lib/hooks/use-invocation-rates'
 import { useInvocationHistory } from '@/lib/hooks/use-invocation-history'
 import type { Monster } from '@/lib/types/monster'
 
+function extractErrorMessage(err: unknown): string {
+  if (err instanceof Error) {
+    try {
+      const parsed = JSON.parse(err.message)
+      if (parsed.message) return parsed.message
+    } catch {
+      if (err.message) return err.message
+    }
+  }
+  return "Une erreur est survenue lors de l'invocation"
+}
+
 export default function InvocationPage() {
   const {
     rates,
@@ -55,9 +67,11 @@ export default function InvocationPage() {
         toast.error(response.message || "Échec de l'invocation")
         refetchHistory()
       }
-    } catch {
+    } catch (err) {
       setIsAnimating(false)
-      toast.error("Une erreur est survenue lors de l'invocation")
+      const msg = extractErrorMessage(err)
+      toast.error(msg)
+      refetchHistory()
     } finally {
       setSummoning(false)
     }
@@ -74,8 +88,8 @@ export default function InvocationPage() {
           toast.error(response.message || "Échec de la relance de l'invocation")
         }
         refetchHistory()
-      } catch {
-        toast.error("Erreur lors de la relance de l'invocation")
+      } catch (err) {
+        toast.error(extractErrorMessage(err))
       } finally {
         setRetrying(false)
       }

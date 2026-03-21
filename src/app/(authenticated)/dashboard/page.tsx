@@ -17,6 +17,18 @@ import { toast } from 'sonner'
 import type { Player } from '@/lib/types/player'
 import type { Monster } from '@/lib/types/monster'
 
+function extractErrorMessage(err: unknown): string {
+  if (err instanceof Error) {
+    try {
+      const parsed = JSON.parse(err.message)
+      if (parsed.message) return parsed.message
+    } catch {
+      if (err.message) return err.message
+    }
+  }
+  return "Échec de l'invocation"
+}
+
 export default function DashboardPage() {
   const { username } = useAuth()
   const [player, setPlayer] = useState<Player | null>(null)
@@ -66,8 +78,8 @@ export default function DashboardPage() {
         setIsAnimating(false)
         toast.error(response.message || "Échec de l'invocation")
       }
-    } catch {
-      toast.error("Échec de l'invocation")
+    } catch (err) {
+      toast.error(extractErrorMessage(err))
       setIsAnimating(false)
     } finally {
       setSummoning(false)
