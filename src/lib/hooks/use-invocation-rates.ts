@@ -9,22 +9,12 @@ export function useInvocationRates() {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
 
-  const fetchRates = async () => {
-    setLoading(true)
-    setError(null)
-    try {
-      const data = await invocationApi.getRates()
-      setRates(data)
-    } catch {
-      setError("Erreur de chargement des taux d'invocation")
-    } finally {
-      setLoading(false)
-    }
-  }
-
   useEffect(() => {
-    fetchRates()
-  }, []) // eslint-disable-line react-hooks/exhaustive-deps
+    invocationApi.getRates()
+      .then(setRates)
+      .catch(() => setError("Erreur chargement taux"))
+      .finally(() => setLoading(false))
+  }, [])
 
-  return { rates, loading, error, refetch: fetchRates }
+  return { rates, loading, error }
 }
