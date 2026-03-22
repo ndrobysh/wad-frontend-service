@@ -1,30 +1,23 @@
 'use client'
 
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect } from 'react'
 import { combatApi } from '@/lib/api/combat'
 import type { CombatLog } from '@/lib/types/combat'
 
-export function useCombatHistory() {
+export function useCombatHistory(): [CombatLog[], boolean, string | null, () => void] {
   const [combats, setCombats] = useState<CombatLog[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
 
-  const fetch = useCallback(async () => {
+  const load = () => {
     setLoading(true)
-    setError(null)
-    try {
-      const data = await combatApi.getHistory()
-      setCombats(data)
-    } catch {
-      setError("Erreur de chargement de l'historique des combats")
-    } finally {
-      setLoading(false)
-    }
-  }, [])
+    combatApi.getHistory()
+      .then(setCombats)
+      .catch(() => setError("Erreur chargement historique"))
+      .finally(() => setLoading(false))
+  }
 
-  useEffect(() => {
-    fetch()
-  }, [fetch])
+  useEffect(() => { load() }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
-  return { combats, loading, error, refetch: fetch }
+  return [combats, loading, error, load]
 }

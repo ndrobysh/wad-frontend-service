@@ -9,7 +9,7 @@ interface MonsterCombatRecordProps {
 }
 
 export function MonsterCombatRecord({ monsterId }: MonsterCombatRecordProps) {
-  const { combats, loading, error } = useCombatHistory()
+  const [combats, loading, error] = useCombatHistory()
 
   const { wins, losses, winRate, recentBattles } = useMemo(() => {
     const relevant = combats.filter(

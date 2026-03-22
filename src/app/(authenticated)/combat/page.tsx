@@ -16,7 +16,7 @@ import type { CombatResponse } from '@/lib/types/combat'
 
 export default function CombatPage() {
   const { monsters, loading: monstersLoading } = useMonsters()
-  const { combats, loading: historyLoading, refetch: refetchHistory } = useCombatHistory()
+  const [combats, historyLoading, , refetchHistory] = useCombatHistory()
 
   const [monster1Id, setMonster1Id] = useState<string | null>(null)
   const [monster2Id, setMonster2Id] = useState<string | null>(null)
