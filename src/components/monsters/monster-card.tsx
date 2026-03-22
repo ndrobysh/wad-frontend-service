@@ -20,7 +20,7 @@ export function MonsterCard({ monster, href }: MonsterCardProps) {
   const content = (
     <div
       className="rounded-sm border-2 border-border bg-card p-5 hover:border-border/80 transition-colors border-l-4"
-      style={{ borderLeftColor: config.color }}
+      style={{ borderLeftColor: config.color, marginBottom: 2 }}
     >
       <div className="flex items-start justify-between mb-3">
         <div className="flex items-center gap-2">

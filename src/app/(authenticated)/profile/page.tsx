@@ -15,6 +15,7 @@ export default function ProfilePage() {
   const [gaining, setGaining] = useState(false)
 
   const handleGainXp = async () => {
+    console.log('gain xp pour', player?.username)
     if (!player) return
     setGaining(true)
     try {

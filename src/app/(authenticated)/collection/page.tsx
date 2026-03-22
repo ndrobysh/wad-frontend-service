@@ -47,6 +47,7 @@ export default function CollectionPage() {
           </p>
         </div>
       ) : (
+      {/* TODO: ajouter pagination */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {monsters.map((monster) => (
             <MonsterCard key={monster.id} monster={monster} href={`/collection/${monster.id}`} />
