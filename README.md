@@ -1,39 +1,10 @@
-# Frontend Service - Next.js
+# Frontend WAD
 
-## Description
-Interface web pour le jeu Gacha WAD.
-
-## Fonctionnalités
-- Connexion / Déconnexion
-- Affichage du profil joueur
-- Invocation de monstres (gacha)
-- Liste des monstres possédés
-
-## Technologies
-- Next.js 14
-- React 18
-- TypeScript
-
-## Lancement
+Interface du jeu gacha.
 
 ```bash
-# Installation
 npm install
-
-# Développement
 npm run dev
-
-# Production
-npm run build
-npm start
 ```
 
-## Port
-3000
-
-## Variables d'environnement
-- `AUTH_API_URL` - URL du service auth
-- `PLAYER_API_URL` - URL du service joueur
-- `MONSTER_API_URL` - URL du service monstre
-- `INVOCATION_API_URL` - URL du service invocation
-# wad-frontend-service
+Port 3000. Les URLs des services backend sont dans les variables d'env (voir .env.local).
